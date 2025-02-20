@@ -1,50 +1,45 @@
-// Import necessary packages
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
+document.getElementById("searchButton").addEventListener("click", function() {
+    const searchQuery = document.getElementById("searchQuery").value;
+    const queryType = document.getElementById("queryType").value;
+    const resultsContainer = document.getElementById("results");
 
-// Initialize the express app
-const app = express();
-const port = process.env.PORT || 5000; // Heroku sets a port, or fallback to 5000 for local development
-
-// Use CORS middleware to allow cross-origin requests
-app.use(cors());
-
-// Middleware to parse JSON bodies
-app.use(express.json());
-
-// API Key for OSINTCat
-const apiKey = "yIrCqD29ZFb3S3IJ63t4_GKFfGrN6tkWjU6cPse6W4k"; // Replace with your own API key
-
-// Define the search route
-app.get('/search', async (req, res) => {
-    const { term, type } = req.query; // Get query parameters: term (search term) and type (query type)
-
-    if (!term || !type) {
-        return res.status(400).json({ error: "Please provide both 'term' and 'type' parameters." });
+    // Check if the search query is empty
+    if (!searchQuery) {
+        resultsContainer.innerHTML = "<p>Please enter a search query.</p>";
+        return;
     }
 
-    try {
-        // Construct the OSINTCat API URL
-        const osintCatUrl = `https://osintcat.com/search?term=${encodeURIComponent(term)}&type=${encodeURIComponent(type)}&api_key=${apiKey}`;
-        
-        // Make the API call to OSINTCat using Axios
-        const response = await axios.get(osintCatUrl);
+    // Show a loading message
+    resultsContainer.innerHTML = "<p>Loading...</p>";
 
-        // Check if we get a valid response from the OSINTCat API
-        if (response.data && response.data.results) {
-            return res.json({ results: response.data.results });
-        } else {
-            return res.status(404).json({ error: "No results found." });
-        }
-    } catch (error) {
-        // Catch any errors during the API request
-        console.error('Error fetching data:', error);
-        return res.status(500).json({ error: "Error fetching data from OSINTCat." });
-    }
-});
+    // Construct the URL for the API request
+    const apiKey = "yIrCqD29ZFb3S3IJ63t4_GKFfGrN6tkWjU6cPse6W4k";  // Replace with your real API key
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";  // CORS proxy URL
+    const targetUrl = `https://osintcat.com/search?term=${encodeURIComponent(searchQuery)}&type=${encodeURIComponent(queryType)}&api_key=${apiKey}`;
+    const requestUrl = proxyUrl + targetUrl;
 
-// Serve the app
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    // Make the API request
+    fetch(requestUrl)
+        .then(response => response.json())  // Parse JSON response
+        .then(data => {
+            // Check if the results exist
+            if (data.results && data.results.length > 0) {
+                let resultHtml = '<div class="result-box">';
+                data.results.forEach(result => {
+                    resultHtml += `
+                        <div class="result-item">
+                            <h3>Result:</h3>
+                            <p>${JSON.stringify(result)}</p>
+                        </div>`;
+                });
+                resultHtml += '</div>';
+                resultsContainer.innerHTML = resultHtml;
+            } else {
+                resultsContainer.innerHTML = "<p>No results found.</p>";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+            resultsContainer.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+        });
 });
