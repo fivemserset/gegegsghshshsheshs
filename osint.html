@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Search Engine</title>
+    <link rel="icon" href="https://images-ext-1.discordapp.net/external/FDMkf9konNwz_N65_68jpZchcb5aM2c1y2UhW0a7BCI/%3Fsize%3D1024/https/cdn.discordapp.com/icons/1341536096101601341/fe3ed8b42d1add6866ea1f2320fa4a99.png?format=webp&quality=lossless&width=683&height=683" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="top-nav">
+                <div class="header-left">
+                    <span class="status">OSINT Search Engine</span>
+                </div>
+                <div class="header-right">
+                    <a href="index.html">Home</a>
+                    <a href="osint.html">OSINT Search</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="search-container">
+                <h2>Search OSINT Data</h2>
+                <input type="text" id="searchQuery" placeholder="Enter email, username, or IP address" />
+                <select id="queryType">
+                    <option value="username">Username</option>
+                    <option value="email">Email</option>
+                    <option value="ip">IP Address</option>
+                    <option value="hash">Hash</option>
+                </select>
+                <button id="searchButton">Search</button>
+            </div>
+
+            <div id="results" class="results-box">
+            </div>
+        </main>
+
+        <footer>
+            <p>OSINT Search Engine 2025</p>
+            <nav>
+                <a href="http://discord.gg/vainty">Contact</a>
+            </nav>
+        </footer>
+    </div>
+    <script src="osint.js"></script>
+</body>
+</html>
