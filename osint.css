@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.header-left .status {
+    color: #00ff00;
+    font-size: 18px;
+}
+
+.header-right a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.header-right a:hover {
+    text-decoration: underline;
+}
+
+main {
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.search-container {
+    margin-bottom: 40px;
+}
+
+#searchQuery {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+.results-box {
+    width: 80%;
+    max-width: 800px;
+    background-color: #111;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    color: #fff;
+    margin-top: 30px;
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+.results-box h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.results-box ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.results-box li {
+    margin: 10px 0;
+}
+
+footer {
+    margin-top: 50px;
+    font-size: 12px;
+    color: #bbb;
+}
+
+footer nav a {
+    color: #bbb;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+footer nav a:hover {
+    text-decoration: underline;
+}
